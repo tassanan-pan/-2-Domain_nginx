@@ -1,0 +1,15 @@
+upstream  etaxweb{
+    server 10.195.101.70:80;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name 10.195.101.70;
+
+    ssl_certificate "/etc/nginx/ssl/getinvoice.net/star_getinvoice_net.crt";
+    ssl_certificate_key "/etc/nginx/ssl/getinvoice.net/_.getinvoice.net.key";
+    access_log /var/log/nginx/access.log;
+    location / {
+        proxy_pass http://etaxweb;
+    }
+}
